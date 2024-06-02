@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (_) => HomePage(),
         HelpPage.routeName: (_) => HelpPage(),
         LevelHomePage.routeName: (_) => LevelHomePage(),
-        LevelPage.routeName: (_) => LevelPage(),
+        LevelPage.routeName: (_) => LevelPage(isGameStart: false,),
       },
     );
   }

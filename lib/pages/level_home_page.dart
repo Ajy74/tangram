@@ -16,13 +16,14 @@ class LevelHomePage extends StatefulWidget {
 class _LevelHomePageState extends State<LevelHomePage> {
   final String appBarText = "Level " + (LevelModel.currentLevel + 1).toString();
 
-  CountdownController countdownController = CountdownController();
+  CountdownController countdownController = CountdownController(autoStart: false);
+  bool isGameStart = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // countdownController. 
+    // countdownController.pause();
   }
 
   @override
@@ -48,7 +49,7 @@ class _LevelHomePageState extends State<LevelHomePage> {
                     color: Colors.white
                   ),
                   child: Countdown(
-                    // controller: countdownController,
+                    controller: countdownController,
                     seconds: (LevelModel.currentLevel + 1) <= 3 ?20: (LevelModel.currentLevel + 1) > 3 && (LevelModel.currentLevel + 1) <= 6 ? 25 : 30,
                     build: (BuildContext context, double time){
                       return Text(
@@ -72,12 +73,38 @@ class _LevelHomePageState extends State<LevelHomePage> {
                 const SizedBox(width: 15,),
             ],
           ),
-          body: LevelPage(),
+          body: LevelPage(isGameStart: isGameStart,),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: _startGame,
+            label: Text(
+              isGameStart ? 'Stop' :'Start',
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white
+              ),
+            ),
+            icon: Icon(isGameStart ? Icons.pause :Icons.play_arrow),
+          ),
         ),
         onWillPop: () async {
           LevelModel.currentLevel = 0;
           Navigator.pop(context);
           return true;
         });
+  }
+
+  void _startGame() {
+    if(!isGameStart){
+      countdownController.start();
+      setState(() {
+        isGameStart = true;
+      });
+    }
+    // else{
+    //   countdownController.pause();
+    //   setState(() {
+    //     isGameStart = false;
+    //   });
+    // }
   }
 }

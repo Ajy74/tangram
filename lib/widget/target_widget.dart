@@ -35,6 +35,7 @@ class _TargetWidgetState extends State<TargetWidget> {
           print(data);
           return true;
         },
+        
         onAccept: (data) {
           if (data.id == widget.shapeModel.id) {
             setState(() {
