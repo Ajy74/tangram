@@ -15,7 +15,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text(
+          'Tangram',
+          style: TextStyle(
+            fontSize: 30
+          ),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -29,6 +34,7 @@ class HomePage extends StatelessWidget {
                 name: "Start",
                 routeName: LevelHomePage.routeName,
               ),
+              const SizedBox(height: 10,),
               MenuItemWidget(
                 color: Colors.grey[700]!,
                 name: "Help",

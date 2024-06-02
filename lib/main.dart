@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     title: 'Tangram Demo',
+     title: 'Tangram',
       debugShowCheckedModeBanner: false,
       initialRoute: HomePage.routeName,
       theme: ThemeData.dark(),

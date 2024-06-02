@@ -21,6 +21,8 @@ class _ShapeWidgetState extends State<ShapeWidget> {
         : Positioned(
             top: widget.shapeModel.position.y,
             left: widget.shapeModel.position.x,
+            // top: widget.shapeModel.isPlaced ? widget.shapeModel.targetPosition.y : widget.shapeModel.position.y,
+            // left: widget.shapeModel.isPlaced ? widget.shapeModel.targetPosition.x : widget.shapeModel.position.x,
             child: Draggable(
               feedback: RotationTransition(
                 turns: AlwaysStoppedAnimation(widget.shapeModel.rotationAngle),
@@ -47,10 +49,18 @@ class _ShapeWidgetState extends State<ShapeWidget> {
               ),
               childWhenDragging: Container(),
               onDragEnd: (DraggableDetails d) {
-                setState(() {
-                  widget.shapeModel.position
-                      .setPosition(d.offset.dx, d.offset.dy);
-                });
+                 if (!widget.shapeModel.isPlaced) {
+                  setState(() {
+                    widget.shapeModel.position
+                        .setPosition(widget.shapeModel.initialPosition.x, widget.shapeModel.initialPosition.y);
+                  });
+                }
+                else{
+                  setState(() {
+                    widget.shapeModel.position
+                        .setPosition(d.offset.dx, d.offset.dy);
+                  });
+                }
               },
             ),
           );
